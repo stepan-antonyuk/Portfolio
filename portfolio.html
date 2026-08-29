@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+    </style>
+</head>
+
+<body>
+    <header>
+        <title>
+            My Portfolio Webpage
+        </title>
+        <nav class="navbar">
+            <a class="navlink" href="#about">About</a>
+            <a class="navlink" href="#projects">Projects</a>
+            <a class="navlink" href="#contacts">Contacts</a>
+        </nav>
+    </header>
+
+    <main >
+        <section class="welcome" id="welcome">
+            <h1>Hello World!</h1>
+            <p>
+                Hello World!
+            </p>
+        </section>
+
+        <section class="about" id="about">
+            <h1>About Me</h1>
+            <figure>
+                <img 
+                src="https://placehold.co/600x400"
+                alt="Photo of me"
+                width="600"
+                height="400"
+                >
+                <figcaption>I don't know what to put here</figcaption>
+            </figure>
+            <p>
+                Full-stack software engineer with experience building backend systems, web applications, and robotics software. Proficient in Python, C++, and Go. Developed autonomous vehicle systems and full-stack applications with APIs, data processing, and frontend interfaces.
+            </p>
+        </section>
+
+        <section class="projects" id="projects">
+            <h1>My Projects</h1>
+            <div>
+                <article>
+                    <h2>Proj 1</h2>
+                    <p>
+                        This project is a Python3-based 3D function renderer built using the Pygame library. It allows users to input mathematical functions and visualize them as 3D shapes projected onto a 2D screen. This tool is designed to make understanding and exploring mathematical functions in three dimensions easier and more interactive.
+                    </p>
+
+                    <h3>Features</h3>
+                    <ul>
+                        <li>3D Visualization of Mathematical Functions: Render mathematical functions in 3D space with customizable parameters.</li>
+                        <li>Parameters: Users can define the range for x and y values and adjust the step size for more control over resolution and detail.</li>
+                        <li>Dynamic Perspective: Includes a camera system to adjust views and explore the rendered function interactively.</li>
+                        <li>Modular Design: Easily extendable for new mathematical functions and additional features.</li>
+                    </ul>
+                    <a href="https://github.com/stepan-antonyuk/3d-function-renderer">Learn More</a>
+                </article>
+            </div>
+            <div>
+                <article>
+                    <h2>Proj 2</h2>
+                    <p>
+                        This project focuses on real-time gesture recognition using a camera. the goal is to design a program that can detect and classify three specific hand gestures: Rock, Paper, and Scissors from a well known game. Given a live video stream the program must recognize the gesture that was performed by a human and automatically generate the winning counter sign.
+                    </p>
+
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Program recognizes hand gestures (Rock, Paper, Scissors) with high confidence.</li>
+                        <li>Program works correctly for different hand size, hand shape, and good lighting conditions.</li>
+                        <li>Human can change sign at any moment and program will respond to it.</li>
+                        <li>Program will detect and track the human hand continuously from video stream.</li>
+                    </ul>
+                    <a href="https://github.com/stepan-antonyuk/CS6384-Rock-Paper-Scissors/tree/main">Learn More</a>
+                </article>
+            </div>
+            <div>
+                <article>
+                    <h2>Proj 3</h2>
+                    <p>
+                        Description for Proj 3
+                    </p>
+
+                    <h3>Features</h3>
+                    <ul>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                    <a href="https://github.com/stepan-antonyuk/Robotic-Arm-The-Guardian">Learn More</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="contacts" id="contacts">
+            <h1>Contact info</h1>
+            <form action="#">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="" placeholder="Name" required><br>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="test@gmail.com" required><br>
+
+                <label for="message">Message</label>
+                <input type="textarea" id="message" name="message" placeholder="some text"><br>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <aside>
+        Test
+    </aside>
+
+    <footer>
+        <p><small>&copy; 2026 My Portfolio. All rights reserved.</small></p>
+        <a href="https://github.com/stepan-antonyuk">Github</a>
+    </footer>
+</body>
+
