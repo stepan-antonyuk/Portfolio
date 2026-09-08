@@ -13,19 +13,18 @@ body {
     margin: 0;
 }
 
-div {
+.box1, .box2 {
     display: flex;
     flex-shrink: 0;
     font-size: 40px;
-    height: 130px;
-    width: 80px;
+    height: 150px;
+    width: 100px;
     font-family: Tahoma;
     border-left: 10px dotted #D0D0FF;
     background-color: #eeeff2;
-    padding: 10px;
 }
 
-div:hover {
+.box1:hover, .box2:hover {
     cursor: pointer;
     background-color: yellow;
     color: goldenrod;
@@ -35,4 +34,8 @@ div:hover {
     position: fixed;
     bottom: 0;
     right: 0;
+}
+
+.text-box {
+    padding: 10px;
 }

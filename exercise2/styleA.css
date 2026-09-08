@@ -12,7 +12,7 @@ body {
     overflow: auto;
 }
 
-div {
+.box1, .box2 {
     display: flex;
     flex-shrink: 0;
     font-size: 40px;
