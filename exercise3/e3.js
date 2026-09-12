@@ -36,9 +36,12 @@ function highlightImportant(titles) {
 // Assumption, the words are separated by only one space and have no extra spaces in front or back.
 function wordFrequency(titles) {
     // TODO: implement
-    let words = new Map();
-    titles.forEach(title => title.toLowerCase().split(" ").map(word => words.has(word) ? words.set(word, words.get(word) + 1) : words.set(word, 1)));
-    //titles.join(" ").toLowerCase().split(" ").map(word => words.has(word) ? words.set(word, words.get(word) + 1) : words.set(word, 1));
+    let words = {};
+    titles.forEach(
+        title => title.toLowerCase().split(" ").forEach(
+            word => words[word] = (words[word] || 0) + 1
+        )
+    );
     return words;
 }
 
