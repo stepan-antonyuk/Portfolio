@@ -10,8 +10,10 @@
  * @param {string[]} titles
  * @returns {string[]}
  */
+// Assumption, the words are separated by only one space and have no extra spaces in front or back.
 function generateIds(titles) {
     // TODO: implement
+    return titles.map(title => title.toLowerCase().split(" ").join("-"));
 }
 
 // Problem 2
@@ -19,8 +21,11 @@ function generateIds(titles) {
  * @param {string[]} titles
  * @returns {string[]}
  */
+// Assumption, the words are separated by only one space and have no extra spaces in front or back.
+// Assumption, the title needs to include word important case insensitive.
 function highlightImportant(titles) {
     // TODO: implement
+    return generateIds(titles.filter(title => title.toLowerCase().includes("important")));
 }
 
 // Problem 3
@@ -28,8 +33,13 @@ function highlightImportant(titles) {
  * @param {string[]} titles
  * @returns {Object}
  */
+// Assumption, the words are separated by only one space and have no extra spaces in front or back.
 function wordFrequency(titles) {
     // TODO: implement
+    let words = new Map();
+    titles.forEach(title => title.toLowerCase().split(" ").map(word => words.has(word) ? words.set(word, words.get(word) + 1) : words.set(word, 1)));
+    //titles.join(" ").toLowerCase().split(" ").map(word => words.has(word) ? words.set(word, words.get(word) + 1) : words.set(word, 1));
+    return words;
 }
 
 // Problem 4
@@ -40,6 +50,9 @@ function wordFrequency(titles) {
  */
 function addMenuItem(menu, item) {
     // TODO: implement
+    let newMenu = [...menu];
+    newMenu.push(item);
+    return newMenu;
 }
 
 // Problem 5
@@ -50,6 +63,7 @@ function addMenuItem(menu, item) {
  */
 function showFormattedMessage(message, formatter) {
     // TODO: implement
+    console.log(formatter(message));
 }
 
 // Problem 6
@@ -60,6 +74,7 @@ function showFormattedMessage(message, formatter) {
  */
 function formatMenu(items, formatter) {
     // TODO: implement
+    return items.map(item => formatter(item));
 }
 
 // Problem 7
@@ -70,6 +85,7 @@ function formatMenu(items, formatter) {
  */
 function updateUser(user, updates) {
     // TODO: implement
+    return {...user, ...updates};
 }
 
 // Problem 8
@@ -79,6 +95,8 @@ function updateUser(user, updates) {
  */
 function removeSensitive(user) {
     // TODO: implement
+    let {password, ...publicUser} = user;
+    return publicUser;
 }
 
 // Problem 9
@@ -88,6 +106,9 @@ function removeSensitive(user) {
  */
 function mergeProfiles(...profiles) {
     // TODO: implement
+    let newProfile;
+    profiles.forEach(profile => newProfile = {...newProfile, ...profile});
+    return newProfile;
 }
 
 // Problem 10
@@ -98,6 +119,13 @@ function mergeProfiles(...profiles) {
  */
 function buildNavigation(sections, formatter) {
     // TODO: implement
+    let highPrioritySections = sections.filter(section => section.priority > 2)
+    let miniNav = highPrioritySections.map(section => ({
+        id: section.title.toLowerCase().split(" ").join("-"),
+        label: formatter(section.title),
+        classes: section.classes
+    }));
+    return miniNav;
 }
 
 
