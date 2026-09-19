@@ -35,29 +35,63 @@ function createTree(vnode) {
  */
 function diff(oldVNode, newVNode, parentNode, index) {
 
-  // You may have to use some of these: appendChild(), removeChild(), 
-  // replaceChild(), removeAttribute(), getAttribute(), textContent, childNodes[]
+    // You may have to use some of these: appendChild(), removeChild(),
+    // replaceChild(), removeAttribute(), getAttribute(), textContent, childNodes[]
+    console.log("===================================")
+    console.log(oldVNode, newVNode, parentNode, index);
+    let realNode = parentNode.childNodes[index];
+    console.log(realNode);
 
-  // Case 1: both are text (string), but may be different
+    switch(true) {
+        // Case 1: both are text (string), but may be different
+        case typeof oldVNode === "string" && typeof newVNode === "string":
+            console.log("CASE 1");
+            if (oldVNode !== newVNode) {
+                console.log("CHANGE TEXT!");
+                realNode.textContent = newVNode;
+            }
+            break;
+        // Case 2: oldVnode is nullish -> append new node to parent
+        case oldVNode == null:
+            console.log("CASE 2");
+            parentNode.appendChild(createTree(newVNode));
+            break;
+        // Case 3: newVnode is nullish -> remove
+        case newVNode == null:
+            console.log("CASE 3");
+            parentNode.removeChild(realNode);
+            break;
+        // Case 4: Node type changed -> replace
+        case oldVNode?.type !== newVNode?.type:
+            console.log("CASE 4");
+            realNode.replaceWith(createTree(newVNode));
+            break;
+        // Case 5: Update attributes
+        default:
+            console.log("CASE 5");
+            // remove old attributes not in new
+            for (let prop in oldVNode?.props) {
+                if (!newVNode?.props[prop]) {
+                    console.log("Remove: ", prop, realNode.getAttribute(prop), oldVNode.props[prop]);
+                    realNode.removeAttribute(prop);
+                }
+            }
+            // add/update new attributes
+            for (let prop in newVNode?.props) {
+                console.log("Add/Update: ", prop, realNode.getAttribute(prop), newVNode.props[prop]);
+                realNode.setAttribute(prop, newVNode.props[prop]);
+            }
+    }
+    console.log(parentNode);
+    console.log("===================================")
 
-  // Case 2: oldVnode is nullish -> append new node to parent
-  
+    // Recursively diff children
+    let length = Math.max(oldVNode?.children?.length, newVNode?.children?.length);
+    for (let i = 0; i < length; i++) {
+        let newOldVNode = oldVNode.children[i];
+        let newNewVNode = newVNode.children[i];
+        let newParentNode = realNode;
+        diff(newOldVNode, newNewVNode, newParentNode, i);
+    }
 
-  // Case 3: newVnode is nullish -> remove
- 
-
-  // Case 4: Node type changed -> replace
- 
-
-  // Case 5: Update attributes
-
-
-    // remove old attributes not in new
-  
-
-    // add/update new attributes
- 
-
-  // Recursively diff children
-  
 }
