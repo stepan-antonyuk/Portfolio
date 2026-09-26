@@ -95,6 +95,7 @@ class DatePicker {
             for (let j = 0; j < y; j++) {
                 let cell = row.insertCell();
                 cell.appendChild(this.createCell(days[day]))
+                cell.classList.add("day");
 
                 day += 1;
             }
