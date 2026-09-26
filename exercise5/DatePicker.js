@@ -76,29 +76,58 @@ class DatePicker {
         return days;
     }
 
-    createCell(day) {
-        let d = document.createTextNode(day.getDate());
-        return d;
+    createHeader(num) {
+        let weekdays = {
+            0: "Su",
+            1: "M",
+            2: "T",
+            3: "W",
+            4: "Th",
+            5: "F",
+            6: "Sa"
+        }
+
+        let header = document.createElement("th");
+        let d = document.createTextNode(weekdays[num]);
+        header.appendChild(d)
+
+        return header
     }
+
+    createCell(day) {
+        let cell = document.createElement("td");
+        let d = document.createTextNode(day.getDate());
+
+        cell.appendChild(d)
+        cell.classList.add("day");
+
+        return cell;
+    }
+
 
     createTable(days) {
         let table = document.createElement("table");
         table.classList.add("datepicker");
 
-        const x = days.length / 7;
+        const x = (days.length / 7) + 1;
         const y = 7;
 
         let day = 0;
 
         for (let i = 0; i < x; i++) {
-            let row = table.insertRow();
+            let row = document.createElement("tr");
             for (let j = 0; j < y; j++) {
-                let cell = row.insertCell();
-                cell.appendChild(this.createCell(days[day]))
-                cell.classList.add("day");
+                if (i === 0) {
+                    let header = this.createHeader(j);
+                    row.appendChild(header);
+                } else {
+                    let cell = this.createCell(days[day]);
+                    row.appendChild(cell);
 
-                day += 1;
+                    day += 1;
+                }
             }
+            table.appendChild(row);
         }
 
         return table;
