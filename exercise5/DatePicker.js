@@ -14,7 +14,7 @@ class DatePicker {
         console.log("1");
         const days = this.getDays(selectedDate);
         console.log("2");
-        return days;
+        this.drawTable(days);
     }
 
     //Get first day of the given month
@@ -74,5 +74,38 @@ class DatePicker {
         }
 
         return days;
+    }
+
+    createCell(day) {
+        let d = document.createTextNode(day.getDate());
+        return d;
+    }
+
+    createTable(days) {
+        let table = document.createElement("table");
+        table.classList.add("datepicker");
+
+        const x = days.length / 7;
+        const y = 7;
+
+        let day = 0;
+
+        for (let i = 0; i < x; i++) {
+            let row = table.insertRow();
+            for (let j = 0; j < y; j++) {
+                let cell = row.insertCell();
+                cell.appendChild(this.createCell(days[day]))
+
+                day += 1;
+            }
+        }
+
+        return table;
+    }
+
+    drawTable(days) {
+        let body = document.getElementById(this.id);
+
+        body.appendChild(this.createTable(days))
     }
 }
