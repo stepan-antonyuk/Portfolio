@@ -163,7 +163,7 @@ class DatePicker {
                 'click', () => {
                     let copyDay = new Date(day);
                     let currDay = {
-                        month: copyDay.getMonth(),
+                        month: copyDay.getMonth() + 1,
                         day: copyDay.getDate(),
                         year: copyDay.getFullYear()
                     }
