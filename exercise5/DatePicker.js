@@ -84,6 +84,7 @@ class DatePicker {
         return days;
     }
 
+    //returns title for calendar header in format "Month / Year"
     createCalendarTitle(selectedDate) {
         const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -95,6 +96,7 @@ class DatePicker {
         return title;
     }
 
+    //returns button that moves user to the past or future month
     //dir is direction of the button, 1 = next month, -1 = past month
     createCalendarButton(selectedDate, dir) {
         let currDate = new Date(selectedDate);
@@ -116,6 +118,7 @@ class DatePicker {
         return button;
     }
 
+    //returns calendar header that contains buttons and title
     createCalendarHeader(selectedDate) {
         let currDate = new Date(selectedDate);
 
@@ -133,6 +136,7 @@ class DatePicker {
         return header;
     }
 
+    //returns header for the days of the week
     createHeader(num) {
         let weekdays = {
             0: "Su",
@@ -151,6 +155,7 @@ class DatePicker {
         return header
     }
 
+    //returns cell for a row, that is either active or inactive
     createCell(day, selectedDate) {
         let cell = document.createElement("td");
         let d = document.createTextNode(day.getDate());
@@ -177,7 +182,7 @@ class DatePicker {
         return cell;
     }
 
-
+    //returns the table with all the days and weeks
     createTable(selectedDate, days) {
         let table = document.createElement("table");
         table.classList.add("datepicker");
@@ -206,6 +211,7 @@ class DatePicker {
         return table;
     }
 
+    //draws the calendar
     drawTable(selectedDate, days) {
         let currDate = new Date(selectedDate)
         let body = document.getElementById(this.id);
