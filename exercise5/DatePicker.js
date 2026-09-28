@@ -14,7 +14,7 @@ class DatePicker {
         console.log("1");
         const days = this.getDays(selectedDate);
         console.log("2");
-        this.drawTable(days);
+        this.drawTable(selectedDate, days);
     }
 
     //Get first day of the given month
@@ -56,6 +56,14 @@ class DatePicker {
         return (firstDayOfTheFirstWeek <= cDate) && (cDate <= lastDayOfTheLastWeek);
     }
 
+    //Check that the provided checkDate is in the same month as selectedDate
+    isInSelectedMonth(checkDate, selectedDate) {
+        const sDate = new Date(selectedDate);
+        const cDate = new Date(checkDate);
+
+        return sDate.getMonth() === cDate.getMonth();
+    }
+
     //Get all days to be displayed on the calendar
     getDays(date) {
         const selectedDate = new Date(date);
@@ -94,18 +102,23 @@ class DatePicker {
         return header
     }
 
-    createCell(day) {
+    createCell(day, selectedDate) {
         let cell = document.createElement("td");
         let d = document.createTextNode(day.getDate());
 
         cell.appendChild(d)
-        cell.classList.add("day");
+
+        if (this.isInSelectedMonth(day, selectedDate)) {
+            cell.classList.add("day");
+        } else {
+            cell.classList.add("outside-month");
+        }
 
         return cell;
     }
 
 
-    createTable(days) {
+    createTable(selectedDate, days) {
         let table = document.createElement("table");
         table.classList.add("datepicker");
 
@@ -121,7 +134,7 @@ class DatePicker {
                     let header = this.createHeader(j);
                     row.appendChild(header);
                 } else {
-                    let cell = this.createCell(days[day]);
+                    let cell = this.createCell(days[day], selectedDate);
                     row.appendChild(cell);
 
                     day += 1;
@@ -133,9 +146,9 @@ class DatePicker {
         return table;
     }
 
-    drawTable(days) {
+    drawTable(selectedDate, days) {
         let body = document.getElementById(this.id);
 
-        body.appendChild(this.createTable(days))
+        body.appendChild(this.createTable(selectedDate, days))
     }
 }
