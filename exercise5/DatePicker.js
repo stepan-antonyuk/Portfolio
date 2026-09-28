@@ -159,6 +159,17 @@ class DatePicker {
 
         if (this.isInSelectedMonth(day, selectedDate)) {
             cell.classList.add("day");
+            cell.addEventListener(
+                'click', () => {
+                    let copyDay = new Date(day);
+                    let currDay = {
+                        month: copyDay.getMonth(),
+                        day: copyDay.getDate(),
+                        year: copyDay.getFullYear()
+                    }
+                    this.callback(this.id, currDay);
+                }
+            )
         } else {
             cell.classList.add("outside-month");
         }
