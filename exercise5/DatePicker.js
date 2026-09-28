@@ -84,6 +84,55 @@ class DatePicker {
         return days;
     }
 
+    createCalendarTitle(selectedDate) {
+        const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+        let currDate = new Date(selectedDate);
+        let title = document.createElement("div");
+        title.classList.add("datepicker-title");
+        title.textContent = month[currDate.getMonth()] + " / " + currDate.getFullYear();
+
+        return title;
+    }
+
+    //dir is direction of the button, 1 = next month, -1 = past month
+    createCalendarButton(selectedDate, dir) {
+        let currDate = new Date(selectedDate);
+
+        let button = document.createElement("button");
+        button.innerText = dir===1 ? ">" : "<";
+        button.addEventListener(
+            'click', () => {
+                let newDate = new Date(currDate);
+                newDate.setMonth(newDate.getMonth() + (dir * 1));
+
+                let calendar = document.getElementById(this.id);
+                calendar.replaceChildren();
+
+                this.render(new Date(newDate));
+            }
+        )
+
+        return button;
+    }
+
+    createCalendarHeader(selectedDate) {
+        let currDate = new Date(selectedDate);
+
+        let header = document.createElement("div");
+        header.classList.add("datepicker-header");
+
+        let title = this.createCalendarTitle(currDate);
+        let buttonL = this.createCalendarButton(currDate, -1);
+        let buttonR = this.createCalendarButton(currDate, 1);
+
+        header.appendChild(buttonL);
+        header.appendChild(title);
+        header.appendChild(buttonR);
+
+        return header;
+    }
+
     createHeader(num) {
         let weekdays = {
             0: "Su",
@@ -147,8 +196,11 @@ class DatePicker {
     }
 
     drawTable(selectedDate, days) {
+        let currDate = new Date(selectedDate)
         let body = document.getElementById(this.id);
 
-        body.appendChild(this.createTable(selectedDate, days))
+        body.appendChild(this.createCalendarHeader(currDate));
+
+        body.appendChild(this.createTable(currDate, days));
     }
 }
