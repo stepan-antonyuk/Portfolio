@@ -11,9 +11,7 @@ class DatePicker {
             throw new Error("selected date is of wrong type");
         }
 
-        console.log("1");
         const days = this.getDays(selectedDate);
-        console.log("2");
         this.drawTable(selectedDate, days);
     }
 
