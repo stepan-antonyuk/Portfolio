@@ -11,6 +11,9 @@ class DatePicker {
             throw new Error("selected date is of wrong type");
         }
 
+        let body = document.getElementById(this.id);
+        body.replaceChildren();
+
         const days = this.getDays(selectedDate);
         this.drawTable(selectedDate, days);
     }
@@ -104,10 +107,8 @@ class DatePicker {
         button.addEventListener(
             'click', () => {
                 let newDate = new Date(currDate);
+                newDate.setDate(1);
                 newDate.setMonth(newDate.getMonth() + (dir * 1));
-
-                let calendar = document.getElementById(this.id);
-                calendar.replaceChildren();
 
                 this.render(new Date(newDate));
             }
@@ -138,11 +139,11 @@ class DatePicker {
     createHeader(num) {
         let weekdays = {
             0: "Su",
-            1: "M",
-            2: "T",
-            3: "W",
+            1: "Mo",
+            2: "Tu",
+            3: "We",
             4: "Th",
-            5: "F",
+            5: "Fr",
             6: "Sa"
         }
 
@@ -172,7 +173,6 @@ class DatePicker {
     //returns the table with all the days and weeks
     createTable(selectedDate, days) {
         let table = document.createElement("table");
-        table.classList.add("datepicker");
 
         const x = (days.length / 7) + 1;
         const y = 7;
@@ -206,7 +206,7 @@ class DatePicker {
                 const copyDay = new Date(selectedDate);
                 const currDay = {
                     month: copyDay.getMonth() + 1,
-                    day: dayNum,
+                    day: Number(dayNum),
                     year: copyDay.getFullYear()
                 }
                 this.callback(this.id, currDay);
