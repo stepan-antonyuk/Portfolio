@@ -4,6 +4,26 @@ class DatePicker {
     constructor(id, callback) {
         this.id = id;
         this.callback = callback;
+
+        this.date = new Date();
+        this.body = document.getElementById(this.id);
+        this.body.addEventListener(
+            'click', (event) => {
+                const active = [...event.target.classList].includes("day");
+                const tag = event.target.tagName;
+
+                if (!active || (tag !== "TD")) {return;}
+
+                const dayNum = event.target.innerText;
+                const copyDay = new Date(this.date);
+                const currDay = {
+                    month: copyDay.getMonth() + 1,
+                    day: Number(dayNum),
+                    year: copyDay.getFullYear()
+                }
+                this.callback(this.id, currDay);
+            }
+        )
     }
 
     render(selectedDate) {
@@ -11,11 +31,11 @@ class DatePicker {
             throw new Error("selected date is of wrong type");
         }
 
-        let body = document.getElementById(this.id);
-        body.replaceChildren();
+        this.date = selectedDate;
+        this.body.replaceChildren();
 
-        const days = this.getDays(selectedDate);
-        this.drawTable(selectedDate, days);
+        const days = this.getDays(this.date);
+        this.drawTable(this.date, days);
     }
 
     //Get first day of the given month
@@ -28,6 +48,7 @@ class DatePicker {
     //Get last day of the given month
     getLastOfMonth(date) {
         let currDate = new Date(date);
+        currDate.setDate(1);
         currDate.setMonth(currDate.getMonth() + 1);
         currDate.setDate(0);
         return new Date(currDate);
@@ -149,9 +170,9 @@ class DatePicker {
 
         let header = document.createElement("th");
         let d = document.createTextNode(weekdays[num]);
-        header.appendChild(d)
+        header.appendChild(d);
 
-        return header
+        return header;
     }
 
     //returns cell for a row, that is either active or inactive
@@ -195,34 +216,14 @@ class DatePicker {
             table.appendChild(row);
         }
 
-        table.addEventListener(
-            'click', (event) => {
-                const active = [...event.target.classList].includes("day");
-                const tag = event.target.tagName;
-
-                if (!active || (tag !== "TD")) {return;}
-
-                const dayNum = event.target.innerText;
-                const copyDay = new Date(selectedDate);
-                const currDay = {
-                    month: copyDay.getMonth() + 1,
-                    day: Number(dayNum),
-                    year: copyDay.getFullYear()
-                }
-                this.callback(this.id, currDay);
-            }
-        )
-
         return table;
     }
 
     //draws the calendar
     drawTable(selectedDate, days) {
         let currDate = new Date(selectedDate)
-        let body = document.getElementById(this.id);
 
-        body.appendChild(this.createCalendarHeader(currDate));
-
-        body.appendChild(this.createTable(currDate, days));
+        this.body.appendChild(this.createCalendarHeader(currDate));
+        this.body.appendChild(this.createTable(currDate, days));
     }
 }
