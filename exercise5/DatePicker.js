@@ -14,7 +14,7 @@ class DatePicker {
 
                 if (!active || (tag !== "TD")) {return;}
 
-                const dayNum = event.target.innerText;
+                const dayNum = event.target.textContent;
                 const copyDay = new Date(this.date);
                 const currDay = {
                     month: copyDay.getMonth() + 1,
@@ -31,7 +31,7 @@ class DatePicker {
             throw new Error("selected date is of wrong type");
         }
 
-        this.date = selectedDate;
+        this.date = new Date(selectedDate);
         this.body.replaceChildren();
 
         const days = this.getDays(this.date);
@@ -92,15 +92,10 @@ class DatePicker {
 
         const currDate = this.getFirstSunday(selectedDate);
         const days = [];
-        let count = 0;
 
         while(this.isInCalendar(currDate, selectedDate)) {
             days.push(new Date(currDate));
             currDate.setDate(currDate.getDate() + 1);
-
-            //This is just a catch for inf loops
-            count += 1;
-            if (count > 50) {break;}
         }
 
         return days;
@@ -124,7 +119,7 @@ class DatePicker {
         const currDate = new Date(selectedDate);
 
         const button = document.createElement("button");
-        button.innerText = dir===1 ? ">" : "<";
+        button.textContent = dir===1 ? ">" : "<";
         button.addEventListener(
             'click', () => {
                 const newDate = new Date(currDate);
