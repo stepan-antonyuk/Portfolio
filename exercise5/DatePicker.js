@@ -20,10 +20,10 @@ class DatePicker {
                     month: copyDay.getMonth() + 1,
                     day: Number(dayNum),
                     year: copyDay.getFullYear()
-                }
+                };
                 this.callback(this.id, currDay);
             }
-        )
+        );
     }
 
     render(selectedDate) {
@@ -40,14 +40,14 @@ class DatePicker {
 
     //Get first day of the given month
     getFirstOfMonth(date) {
-        let currDate = new Date(date);
+        const currDate = new Date(date);
         currDate.setDate(1);
         return new Date(currDate);
     }
 
     //Get last day of the given month
     getLastOfMonth(date) {
-        let currDate = new Date(date);
+        const currDate = new Date(date);
         currDate.setDate(1);
         currDate.setMonth(currDate.getMonth() + 1);
         currDate.setDate(0);
@@ -56,15 +56,15 @@ class DatePicker {
 
     //Get first week's sunday of selected month 
     getFirstSunday(date) {
-        let currDate = this.getFirstOfMonth(date);
-        let diff = currDate.getDate() - currDate.getDay();
+        const currDate = this.getFirstOfMonth(date);
+        const diff = currDate.getDate() - currDate.getDay();
         return new Date(currDate.setDate(diff));
     }
 
     //Get last week's saturday of selected month 
     getLastSaturday(date) {
-        let currDate = this.getLastOfMonth(date);
-        let diff = currDate.getDate() + (6 - currDate.getDay());
+        const currDate = this.getLastOfMonth(date);
+        const diff = currDate.getDate() + (6 - currDate.getDay());
         return new Date(currDate.setDate(diff));
     }
 
@@ -90,8 +90,8 @@ class DatePicker {
     getDays(date) {
         const selectedDate = new Date(date);
 
-        let currDate = this.getFirstSunday(selectedDate);
-        let days = [];
+        const currDate = this.getFirstSunday(selectedDate);
+        const days = [];
         let count = 0;
 
         while(this.isInCalendar(currDate, selectedDate)) {
@@ -110,8 +110,8 @@ class DatePicker {
     createCalendarTitle(selectedDate) {
         const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-        let currDate = new Date(selectedDate);
-        let title = document.createElement("div");
+        const currDate = new Date(selectedDate);
+        const title = document.createElement("div");
         title.classList.add("datepicker-title");
         title.textContent = month[currDate.getMonth()] + " / " + currDate.getFullYear();
 
@@ -121,33 +121,33 @@ class DatePicker {
     //returns button that moves user to the past or future month
     //dir is direction of the button, 1 = next month, -1 = past month
     createCalendarButton(selectedDate, dir) {
-        let currDate = new Date(selectedDate);
+        const currDate = new Date(selectedDate);
 
-        let button = document.createElement("button");
+        const button = document.createElement("button");
         button.innerText = dir===1 ? ">" : "<";
         button.addEventListener(
             'click', () => {
-                let newDate = new Date(currDate);
+                const newDate = new Date(currDate);
                 newDate.setDate(1);
                 newDate.setMonth(newDate.getMonth() + (dir * 1));
 
                 this.render(new Date(newDate));
             }
-        )
+        );
 
         return button;
     }
 
     //returns calendar header that contains buttons and title
     createCalendarHeader(selectedDate) {
-        let currDate = new Date(selectedDate);
+        const currDate = new Date(selectedDate);
 
-        let header = document.createElement("div");
+        const header = document.createElement("div");
         header.classList.add("datepicker-header");
 
-        let title = this.createCalendarTitle(currDate);
-        let buttonL = this.createCalendarButton(currDate, -1);
-        let buttonR = this.createCalendarButton(currDate, 1);
+        const title = this.createCalendarTitle(currDate);
+        const buttonL = this.createCalendarButton(currDate, -1);
+        const buttonR = this.createCalendarButton(currDate, 1);
 
         header.appendChild(buttonL);
         header.appendChild(title);
@@ -158,7 +158,7 @@ class DatePicker {
 
     //returns header for the days of the week
     createHeader(num) {
-        let weekdays = {
+        const weekdays = {
             0: "Su",
             1: "Mo",
             2: "Tu",
@@ -166,10 +166,10 @@ class DatePicker {
             4: "Th",
             5: "Fr",
             6: "Sa"
-        }
+        };
 
-        let header = document.createElement("th");
-        let d = document.createTextNode(weekdays[num]);
+        const header = document.createElement("th");
+        const d = document.createTextNode(weekdays[num]);
         header.appendChild(d);
 
         return header;
@@ -177,10 +177,10 @@ class DatePicker {
 
     //returns cell for a row, that is either active or inactive
     createCell(day, selectedDate) {
-        let cell = document.createElement("td");
-        let d = document.createTextNode(day.getDate());
+        const cell = document.createElement("td");
+        const d = document.createTextNode(day.getDate());
 
-        cell.appendChild(d)
+        cell.appendChild(d);
 
         if (this.isInSelectedMonth(day, selectedDate)) {
             cell.classList.add("day");
@@ -193,7 +193,7 @@ class DatePicker {
 
     //returns the table with all the days and weeks
     createTable(selectedDate, days) {
-        let table = document.createElement("table");
+        const table = document.createElement("table");
 
         const x = (days.length / 7) + 1;
         const y = 7;
@@ -201,13 +201,13 @@ class DatePicker {
         let day = 0;
 
         for (let i = 0; i < x; i++) {
-            let row = document.createElement("tr");
+            const row = document.createElement("tr");
             for (let j = 0; j < y; j++) {
                 if (i === 0) {
-                    let header = this.createHeader(j);
+                    const header = this.createHeader(j);
                     row.appendChild(header);
                 } else {
-                    let cell = this.createCell(days[day], selectedDate);
+                    const cell = this.createCell(days[day], selectedDate);
                     row.appendChild(cell);
 
                     day += 1;
@@ -221,7 +221,7 @@ class DatePicker {
 
     //draws the calendar
     drawTable(selectedDate, days) {
-        let currDate = new Date(selectedDate)
+        const currDate = new Date(selectedDate);
 
         this.body.appendChild(this.createCalendarHeader(currDate));
         this.body.appendChild(this.createTable(currDate, days));
