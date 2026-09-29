@@ -40,18 +40,12 @@ class DatePicker {
 
     //Get first day of the given month
     getFirstOfMonth(date) {
-        const currDate = new Date(date);
-        currDate.setDate(1);
-        return new Date(currDate);
+        return new Date(date.getFullYear(), date.getMonth(), 1);
     }
 
     //Get last day of the given month
     getLastOfMonth(date) {
-        const currDate = new Date(date);
-        currDate.setDate(1);
-        currDate.setMonth(currDate.getMonth() + 1);
-        currDate.setDate(0);
-        return new Date(currDate);
+        return new Date(date.getFullYear(), date.getMonth() + 1, 0);
     }
 
     //Get first week's sunday of selected month 
