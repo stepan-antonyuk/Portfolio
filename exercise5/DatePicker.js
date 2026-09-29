@@ -164,17 +164,6 @@ class DatePicker {
 
         if (this.isInSelectedMonth(day, selectedDate)) {
             cell.classList.add("day");
-            cell.addEventListener(
-                'click', () => {
-                    let copyDay = new Date(day);
-                    let currDay = {
-                        month: copyDay.getMonth() + 1,
-                        day: copyDay.getDate(),
-                        year: copyDay.getFullYear()
-                    }
-                    this.callback(this.id, currDay);
-                }
-            )
         } else {
             cell.classList.add("outside-month");
         }
@@ -207,6 +196,24 @@ class DatePicker {
             }
             table.appendChild(row);
         }
+
+        table.addEventListener(
+            'click', (event) => {
+                const active = [...event.target.classList].includes("day");
+                const tag = event.target.tagName;
+
+                if (!active || (tag !== "TD")) {return;}
+
+                const dayNum = event.target.innerText;
+                const copyDay = new Date(selectedDate);
+                const currDay = {
+                    month: copyDay.getMonth() + 1,
+                    day: dayNum,
+                    year: copyDay.getFullYear()
+                }
+                this.callback(this.id, currDay);
+            }
+        )
 
         return table;
     }
