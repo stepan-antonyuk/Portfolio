@@ -126,7 +126,6 @@ function getWatchListButton(movie_info) {
     const button = document.createElement("button");
 
     button.classList.add("add-btn");
-    button.id = "search-preview-watchlist-button";
     button.type = "button";
     button.textContent = "+Watchlist";
 

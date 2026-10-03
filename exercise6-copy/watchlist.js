@@ -104,7 +104,6 @@ function getRemoveFromWatchlistButton(movie_info) {
     const button = document.createElement("button");
 
     button.classList.add("remove-btn");
-    button.id = "watchlist-list-remove-from-watchlist-button";
     button.type = "button";
     button.textContent = "Remove";
 
