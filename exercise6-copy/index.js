@@ -29,6 +29,7 @@ function attachSearch() {
 
 async function fetchMovieByTitle(movie_title) {
     const title = movie_title.replace(/\s+/g, ' ').trim();
+    document.getElementById("movieList").replaceChildren();
 
     if(!title) {
         //console.log("Empty title!");
