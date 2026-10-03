@@ -38,7 +38,7 @@ async function fetchMovieByTitle(movie_title) {
     }
 
     try {
-        const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&t=${title}`);
+        const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${title}`);
 
         if (!response.ok) {
             throw new Error('Bad Response!');
@@ -59,7 +59,9 @@ function showMovie(movie_info) {
         return;
     }
 
-    createMovieCard(movie_info);
+    for (const movie of movie_info.Search) {
+        createMovieCard(movie);
+    }
     clearMessage();
 }
 
