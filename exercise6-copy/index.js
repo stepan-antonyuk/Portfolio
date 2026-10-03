@@ -4,11 +4,13 @@
 "use strict";
 
 const API_KEY = "3787d80a";
+attachSearch();
 
-function attachSearchToSearchButton() {
-    const button = document.getElementById("searchBtn");
-    button.addEventListener(
-        'click', () => {
+function attachSearch() {
+    const form = document.getElementById("searchForm");
+    form.addEventListener(
+        'submit', (event) => {
+            event.preventDefault();
             const title = document.getElementById("searchInput").value;
             fetchMovieByTitle(title);
         }

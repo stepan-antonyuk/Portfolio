@@ -2,6 +2,7 @@
 
 // Implement the watchlist display and Remove functionality in this file.
 "use strict";
+showWatchlist();
 
 function showWatchlist() {
     const watchlist_list = document.getElementById("movieList");
