@@ -49,7 +49,7 @@ async function fetchMovieByTitle(movie_title) {
         showMovie(movie_info);
     } catch (error) {
         console.error(error.message);
-        showMessage(error.message);
+        showMessage("Could not load movies. Please try again later.");
     }
 }
 
