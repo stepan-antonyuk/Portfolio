@@ -30,7 +30,7 @@ async function fetchMovieByTitle(movie_title) {
         const movie_info = await response.json();
         showMovie(movie_info);
     } catch (error) {
-        console.error(error.messaage);
+        console.error(error.message);
     }
 }
 
@@ -53,8 +53,11 @@ function createMovieCard(movie_info) {
 
     const list = getMovieInfoList(movie_info);
 
+    const watchlist_button = getWatchListButton(movie_info);
+
     card.appendChild(poster);
     card.appendChild(list);
+    card.appendChild(watchlist_button);
 
     preview.appendChild(card);
 }
@@ -92,4 +95,41 @@ function getMovieInfoList(movie_info) {
     list.appendChild(type);
 
     return list;
+}
+
+function getWatchListButton(movie_info) {
+    const button = document.createElement("button");
+
+    button.id = "search-preview-watchlist-button";
+    button.type = "button";
+    button.textContent = "Add to Watchlist";
+
+    button.addEventListener(
+        'click', () => {
+            let watchlist = JSON.parse(localStorage.getItem("watchlist"));
+
+            if (watchlist == null) {
+                watchlist = [];
+            }
+
+            if (watchlist.some(another_movie => another_movie.imdbID === movie_info.imdbID)) {
+                alert("This movie is already in watchlist");
+                return;
+            }
+
+            const movie ={
+                imdbID: movie_info.imdbID,
+                Poster: movie_info.Poster,
+                Title: movie_info.Title,
+                Year: movie_info.Year,
+                Type: movie_info.Type,
+                Response: movie_info.Response
+            }
+
+            watchlist.push(movie);
+            localStorage.setItem("watchlist", JSON.stringify(watchlist));
+        }
+    )
+
+    return button;
 }
