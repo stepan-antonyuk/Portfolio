@@ -4,6 +4,16 @@
 "use strict";
 showWatchlist();
 
+function showMessage(messasge) {
+    const body = document.getElementById("message");
+    body.textContent = messasge;
+}
+
+function clearMessage() {
+    const body = document.getElementById("message");
+    body.replaceChildren();
+}
+
 function showWatchlist() {
     const watchlist_list = document.getElementById("movieList");
     watchlist_list.replaceChildren();
@@ -19,12 +29,13 @@ function showWatchlist() {
 }
 
 function createWatchlistIsEmpty() {
-    const watchlist_list = document.getElementById("movieList");
+    //const watchlist_list = document.getElementById("movieList");
 
-    const body = document.createElement("div");
-    const text = document.createTextNode("Watchlist is empty.");
-    body.appendChild(text);
-    watchlist_list.appendChild(body);
+    //const body = document.createElement("div");
+    //const text = document.createTextNode("Watchlist is empty.");
+    //body.appendChild(text);
+    //watchlist_list.appendChild(body);
+    showMessage("Watchlist is empty.");
 }
 
 function createWatchlistCards(watchlist) {
@@ -38,15 +49,16 @@ function createMovieCard(movie_info) {
     const watchlist_list = document.getElementById("movieList");
 
     const card = document.createElement("div");
+    card.classList.add("movie-card");
 
     const poster = getMoviePoster(movie_info.Poster);
 
-    const list = getMovieInfoList(movie_info);
+    const info = getMovieInfo(movie_info);
 
     const watchlist_remove_button = getRemoveFromWatchlistButton(movie_info);
 
     card.appendChild(poster);
-    card.appendChild(list);
+    card.appendChild(info);
     card.appendChild(watchlist_remove_button);
 
     watchlist_list.appendChild(card);
@@ -65,34 +77,36 @@ function getMoviePoster(movie_poster) {
     return poster;
 }
 
-function getMovieInfoList(movie_info) {
-    const list = document.createElement("ul")
+function getMovieInfo(movie_info) {
+    const body = document.createElement("div");
+    body.classList.add("movie-info");
 
-    const title = document.createElement("li");
+    const title = document.createElement("h5");
     const title_text = document.createTextNode(movie_info.Title);
     title.appendChild(title_text);
 
-    const year = document.createElement("li");
+    const year = document.createElement("p");
     const year_text = document.createTextNode(movie_info.Year);
     year.appendChild(year_text);
 
-    const type = document.createElement("li");
+    const type = document.createElement("label");
     const type_text = document.createTextNode(movie_info.Type);
     type.appendChild(type_text);
 
-    list.appendChild(title);
-    list.appendChild(year);
-    list.appendChild(type);
+    body.appendChild(title);
+    body.appendChild(year);
+    body.appendChild(type);
 
-    return list;
+    return body;
 }
 
 function getRemoveFromWatchlistButton(movie_info) {
     const button = document.createElement("button");
 
+    button.classList.add("remove-btn");
     button.id = "watchlist-list-remove-from-watchlist-button";
     button.type = "button";
-    button.textContent = "Remove from Watchlist";
+    button.textContent = "Remove";
 
     button.addEventListener(
         'click', () => {
