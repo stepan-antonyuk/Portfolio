@@ -4,9 +4,9 @@
 "use strict";
 showWatchlist();
 
-function showMessage(messasge) {
+function showMessage(message) {
     const body = document.getElementById("message");
-    body.textContent = messasge;
+    body.textContent = message;
 }
 
 function clearMessage() {
@@ -29,12 +29,6 @@ function showWatchlist() {
 }
 
 function createWatchlistIsEmpty() {
-    //const watchlist_list = document.getElementById("movieList");
-
-    //const body = document.createElement("div");
-    //const text = document.createTextNode("Watchlist is empty.");
-    //body.appendChild(text);
-    //watchlist_list.appendChild(body);
     showMessage("Watchlist is empty.");
 }
 

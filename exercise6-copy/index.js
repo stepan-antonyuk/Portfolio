@@ -6,9 +6,9 @@
 const API_KEY = "3787d80a";
 attachSearch();
 
-function showMessage(messasge) {
+function showMessage(message) {
     const body = document.getElementById("message");
-    body.textContent = messasge;
+    body.textContent = message;
 }
 
 function clearMessage() {
@@ -32,8 +32,6 @@ async function fetchMovieByTitle(movie_title) {
     document.getElementById("movieList").replaceChildren();
 
     if(!title) {
-        //console.log("Empty title!");
-        //alert("Empty title!");
         showMessage("Empty title!");
         return;
     }
@@ -55,7 +53,6 @@ async function fetchMovieByTitle(movie_title) {
 
 function showMovie(movie_info) {
     if (movie_info.Response === "False") {
-        //alert(movie_info.Error);
         showMessage(movie_info.Error);
         return;
     }
@@ -68,7 +65,6 @@ function showMovie(movie_info) {
 
 function createMovieCard(movie_info) {
     const preview = document.getElementById("movieList");
-    //preview.replaceChildren();
 
     const card = document.createElement("div");
     card.classList.add("movie-card");
@@ -134,7 +130,6 @@ function getWatchListButton(movie_info) {
             const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
             if (watchlist.some(another_movie => another_movie.imdbID === movie_info.imdbID)) {
-                //alert("This movie is already in watchlist");
                 showMessage(`${movie_info.Title} is already in watchlist`);
                 return;
             }
