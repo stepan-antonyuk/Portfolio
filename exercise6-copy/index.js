@@ -39,7 +39,7 @@ async function fetchMovieByTitle(movie_title) {
     }
 
     try {
-        const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${title}`);
+        const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent(title)}`);
 
         if (!response.ok) {
             throw new Error('Bad Response!');
