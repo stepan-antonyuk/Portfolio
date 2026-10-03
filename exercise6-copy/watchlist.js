@@ -18,9 +18,9 @@ function showWatchlist() {
     const watchlist_list = document.getElementById("movieList");
     watchlist_list.replaceChildren();
 
-    const watchlist = JSON.parse(localStorage.getItem("watchlist"));
+    const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
-    if (!watchlist?.length) {
+    if (!watchlist.length) {
         createWatchlistIsEmpty();
         return
     }
@@ -109,7 +109,7 @@ function getRemoveFromWatchlistButton(movie_info) {
 
     button.addEventListener(
         'click', () => {
-            let watchlist = JSON.parse(localStorage.getItem("watchlist"));
+            const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
             let new_watchlist = watchlist.filter(another_movie => another_movie.imdbID != movie_info.imdbID);
 

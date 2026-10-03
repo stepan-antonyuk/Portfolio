@@ -131,11 +131,7 @@ function getWatchListButton(movie_info) {
 
     button.addEventListener(
         'click', () => {
-            let watchlist = JSON.parse(localStorage.getItem("watchlist"));
-
-            if (watchlist == null) {
-                watchlist = [];
-            }
+            const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
             if (watchlist.some(another_movie => another_movie.imdbID === movie_info.imdbID)) {
                 //alert("This movie is already in watchlist");
