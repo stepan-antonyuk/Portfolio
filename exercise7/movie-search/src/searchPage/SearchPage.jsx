@@ -32,14 +32,14 @@ function SearchPage() {
                 throw new Error('Bad Response!');
             }
 
-            const movie_info = await response.json();
+            const data = await response.json();
 
-            if (movie_info.Response === "False") {
-                setInfoMessage(movie_info.Error);
+            if (data.Response === "False") {
+                setInfoMessage(data.Error);
                 return;
             }
 
-            setMovies([...movie_info.Search])
+            setMovies([...data.Search])
             setInfoMessage('')
         } catch (error) {
             console.error(error.message);
@@ -51,7 +51,7 @@ function SearchPage() {
         <>
             <main>
                 <form
-                    class="search"
+                    className="search"
                     id="searchForm"
                     onSubmit={handleSubmit}
                 >
@@ -64,11 +64,12 @@ function SearchPage() {
                     <button type="submit" id="searchBtn">Search</button>
                 </form>
 
-                <p id="message" class="message">{infoMessage}</p>
+                <p id="message" className="message">{infoMessage}</p>
 
-                <section class="movie-list" id="movieList">
+                <section className="movie-list" id="movieList">
                     {movies.map((movie) => (
                         <MovieCard
+                            key={movie.imdbID}
                             setInfoMessage={setInfoMessage}
                             imdbID={movie.imdbID}
                             poster={movie.Poster}
