@@ -43,7 +43,7 @@ function AddWatchlistButton({
     const handleOnClick = () => {
         const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
-        if (watchlist.some(another_movie => another_movie.imdbID === imdbID)) {
+        if (watchlist.some(otherMovie => otherMovie.imdbID === imdbID)) {
             setInfoMessage(`${title} is already in watchlist`);
             return;
         }
@@ -76,9 +76,9 @@ function RemoveWatchlistButton({
 }) {
     const handleOnClick = () => {
         const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-        let new_watchlist = watchlist.filter(another_movie => another_movie.imdbID != imdbID);
-        localStorage.setItem("watchlist", JSON.stringify(new_watchlist));
-        setWatchlist([...new_watchlist])
+        let newWatchlist = watchlist.filter(otherMovie => otherMovie.imdbID != imdbID);
+        localStorage.setItem("watchlist", JSON.stringify(newWatchlist));
+        setWatchlist([...newWatchlist])
     }
 
     return (

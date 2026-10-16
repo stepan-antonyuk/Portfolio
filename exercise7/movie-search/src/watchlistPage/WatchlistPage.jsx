@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import './WatchlistPage.css'
-import '../movieCard/MovieCard.jsx'
 import MovieCard from '../movieCard/MovieCard.jsx';
 
 function WatchlistPage() {

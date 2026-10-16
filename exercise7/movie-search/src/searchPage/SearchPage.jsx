@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './SearchPage.css'
-import '../movieCard/MovieCard.jsx'
 import MovieCard from '../movieCard/MovieCard.jsx';
 
 const API_KEY = "3787d80a";

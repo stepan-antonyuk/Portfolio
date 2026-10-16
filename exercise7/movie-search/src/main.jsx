@@ -17,7 +17,7 @@ const router = createBrowserRouter(
                     element: <SearchPage />
                 },
                 {
-                    path: "/watchlist",
+                    path: "watchlist",
                     element: <WatchlistPage />
                 }
             ]

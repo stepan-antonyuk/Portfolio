@@ -1,0 +1,28 @@
+main {
+  padding: 1rem;
+}
+
+.search {
+  margin-bottom: 2rem;
+}
+
+#searchInput {
+  padding: 0.5rem;
+  width: 250px;
+}
+
+#searchBtn {
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.message {
+  min-height: 1.5rem;
+}
+
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
